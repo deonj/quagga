@@ -19,6 +19,3 @@ RUN chown quagga *.conf
 RUN rc-update add zebra
 RUN rc-update add ospfd
 RUN rc-update add bgpd
-RUN rc-service zebra start
-RUN rc-service ospfd start
-RUN rc-service bgpd start
