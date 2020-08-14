@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk update
-RUN apk add quagga busybox-extras
+RUN apk --no-cache add quagga openrc busybox-extras
 WORKDIR /etc/quagga
 RUN touch daemons
 RUN echo 'zebra=yes' >> daemons
