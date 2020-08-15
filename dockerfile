@@ -13,8 +13,9 @@ RUN wget https://raw.githubusercontent.com/deonj/quagga/master/bgpd.conf
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ospf6d.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripd.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripngd.conf.sample
-RUN wget -P /etc https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
 RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
+WORKDIR /etc
+RUN wget https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
