@@ -17,5 +17,5 @@ RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
 WORKDIR /etc
-RUN wget https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
+RUN wget wget https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
