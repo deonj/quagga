@@ -1,6 +1,6 @@
 FROM alpine:latest
 RUN apk update
-RUN apk --no-cache add quagga supervisor busybox-extras
+RUN apk add --no-cache quagga supervisor busybox-extras
 WORKDIR /etc/quagga
 RUN touch daemons
 RUN echo 'zebra=yes' >> daemons
