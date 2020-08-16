@@ -7,9 +7,9 @@ This is the Quagga routing suite installed on Alpine linux. The daemons can be e
 
 All other conf files are added in the /etc/quagga directory
 
-## Example ##
+## Example 1: Lab deployment ##
 
-To create a network of routers as shown in topology below:
+An isolated lab environment can be created. An example of a 3 router lab environment is shown in the topology below:
 
     +-----------+                 +-----------+               +-----------+
     |           |                 |           |               |           |
@@ -27,7 +27,8 @@ A docker-compose file can be created as follows:
         container_name: router-1
         image: deonj/quagga
         networks:
-          - net1
+          net1:
+            ipv4_address: 192.168.1.20
         volumes:
           - router1-config:/etc/quagga
         tty: true
@@ -37,8 +38,10 @@ A docker-compose file can be created as follows:
         container_name: router-2
         image: deonj/quagga
         networks:
-          - net1
-          - net2
+          net1:
+            ipv4_address: 192.168.1.10
+          net2:
+            ipv4_address: 192.168.2.10
         volumes:
           - router2-config:/etc/quagga
         tty: true
@@ -48,13 +51,14 @@ A docker-compose file can be created as follows:
         container_name: router-3
         image: deonj/quagga
         networks:
-          - net2
+          net2:
+            ipv4_address: 192.168.2.20
         volumes:
           - router3-config:/etc/quagga
         restart:
           on-failure
         tty: true
-    
+       
     networks:
       net1:
         name: net1
@@ -66,7 +70,7 @@ A docker-compose file can be created as follows:
         ipam:
           config:
             - subnet: "192.168.2.0/24"
-    
+       
     volumes:
       router1-config:
       router2-config:
