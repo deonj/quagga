@@ -21,8 +21,14 @@ RUN mv -f supervisord.conf /etc
 RUN echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.default.forwarding=1" >> /etc/sysctl.conf
-RUN echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
-RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.all.mc_forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.default.mc_forwarding=1" >> /etc/sysctl.conf
+# Testing below
+RUN echo "net.ipv4.conf.all.accept_redirects = 1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.all.accept_source_route = 1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.all.accept_source_route = 1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.all.send_redirects = 1" >> /etc/sysctl.conf
+# End testing
+RUN echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
