@@ -1,6 +1,5 @@
 FROM alpine:latest
 RUN apk update
-# RUN apk add --no-cache quagga supervisor busybox-extras
 RUN apk add --no-cache quagga busybox-extras
 WORKDIR /etc/quagga
 RUN touch daemons
@@ -14,13 +13,11 @@ RUN wget https://raw.githubusercontent.com/deonj/quagga/master/bgpd.conf
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ospf6d.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripd.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripngd.conf.sample
-RUN wget https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
 RUN wget -P /usr/local/share/ https://raw.githubusercontent.com/deonj/quagga/master/startup_script.sh
 RUN chmod 744 /usr/local/share/startup_script.sh
 RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
-RUN mv -f supervisord.conf /etc
 RUN echo "net.ipv4.ip_forward = 1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.default.forwarding=1" >> /etc/sysctl.conf
@@ -29,5 +26,4 @@ RUN echo "net.ipv4.conf.default.mc_forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.router_solicitations = 1" >> /etc/sysctl.conf
-# CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
-ENTRYPOINT ["/bin/sh", "/usr/local/share/startup_script.sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/usr/local/share/startup_script.sh; sh"]
