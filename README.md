@@ -54,13 +54,19 @@ A docker-compose file can be created as follows:
         restart:
           on-failure
         tty: true
-        
+    
     networks:
       net1:
         name: net1
+        ipam:
+          config:
+            - subnet: "192.168.1.0/24"
       net2:
         name: net2
-          
+        ipam:
+          config:
+            - subnet: "192.168.2.0/24"
+    
     volumes:
       router1-config:
       router2-config:
