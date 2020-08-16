@@ -16,6 +16,7 @@ RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripd.
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripngd.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/supervisord.conf
 RUN wget -P /usr/local/share/ https://raw.githubusercontent.com/deonj/quagga/master/startup_script.sh
+RUN chmod 744 /usr/local/share/startup_script.sh
 RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
