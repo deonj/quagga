@@ -1,5 +1,7 @@
 #!/bin/sh
 
+set -e
+
 # "Starting the zebra daemon"
 /usr/sbin/zebra -d
 # "Starting the ospf daemon"
