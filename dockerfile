@@ -18,4 +18,10 @@ RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
 RUN mv -f supervisord.conf /etc
+RUN echo "net.ipv4.conf.all.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.default.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.all.forwarding=1/" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.all.mc_forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv4.conf.default.mc_forwarding=1" >> /etc/sysctl.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
