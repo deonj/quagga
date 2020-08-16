@@ -25,4 +25,5 @@ RUN echo "net.ipv4.conf.all.mc_forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv4.conf.default.mc_forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
+RUN echo "net.ipv6.conf.default.router_solicitations = 1" >> /etc/sysctl.conf
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisord.conf"]
