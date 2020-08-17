@@ -13,8 +13,8 @@ RUN wget https://raw.githubusercontent.com/deonj/quagga/master/bgpd.conf
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ospf6d.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripd.conf.sample
 RUN wget https://raw.githubusercontent.com/deonj/quagga/master/sample_conf/ripngd.conf.sample
-RUN wget -P /usr/local/share/ https://raw.githubusercontent.com/deonj/quagga/master/startup_script.sh
-RUN chmod 744 /usr/local/share/startup_script.sh
+RUN wget -P /opt/ https://raw.githubusercontent.com/deonj/quagga/master/startup_script.sh
+RUN chmod 744 /opt/startup_script.sh
 RUN sed -i "s/!hostname/hostname/" vtysh.conf
 RUN sed -i "s/!username/username/" vtysh.conf
 RUN chown quagga *.conf
@@ -26,4 +26,4 @@ RUN echo "net.ipv4.conf.default.mc_forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.all.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.forwarding=1" >> /etc/sysctl.conf
 RUN echo "net.ipv6.conf.default.router_solicitations = 1" >> /etc/sysctl.conf
-ENTRYPOINT ["/bin/sh", "-c", "/usr/local/share/startup_script.sh; sh"]
+ENTRYPOINT ["/bin/sh", "-c", "/opt/startup_script.sh; sh"]
