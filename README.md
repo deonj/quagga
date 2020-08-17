@@ -77,6 +77,7 @@ A docker-compose file can be created as follows:
       router3-config:
 
 The volumes are created if the user wants to backup the config files. The full topology can then be launched: 
+
     docker-compose up -d
     
 **Note:** While the routing protocols will work, the data path wil not. This is because the Docker container automatically creates a default gateway which routes to the host for any external networks. This would mean that a ping from router 3 to router 1 will fail due to the ICMP routing to the host before it tries to reach router 1. If you find a way to remove the default gateway, I would like to know.
