@@ -1,5 +1,4 @@
 FROM alpine:latest
-RUN apk update
 RUN apk add --no-cache quagga busybox-extras
 WORKDIR /etc/quagga
 RUN touch daemons
